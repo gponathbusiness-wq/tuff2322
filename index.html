@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WAFFLE — Filmes, Séries & Animes</title>
+  <meta name="description" content="Assista filmes, séries e animes online gratuitamente. Conteúdo atualizado com os lançamentos mais recentes." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'><rect x='4' y='4' width='14' height='14' rx='3' fill='%2300d4aa'/><rect x='22' y='4' width='14' height='14' rx='3' fill='%233b82f6' opacity='.7'/><rect x='4' y='22' width='14' height='14' rx='3' fill='%233b82f6' opacity='.7'/><rect x='22' y='22' width='14' height='14' rx='3' fill='%2300d4aa'/></svg>" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- Ambient Background -->
+  <div class="ambient-bg" id="ambientBg"></div>
+  <div class="noise-overlay"></div>
+
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#" class="nav-logo" id="navLogoBtn">
+        <div class="logo-icon">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="4" y="4" width="14" height="14" rx="3" fill="url(#grad1)"/>
+            <rect x="22" y="4" width="14" height="14" rx="3" fill="url(#grad2)" opacity="0.7"/>
+            <rect x="4" y="22" width="14" height="14" rx="3" fill="url(#grad2)" opacity="0.7"/>
+            <rect x="22" y="22" width="14" height="14" rx="3" fill="url(#grad1)"/>
+            <defs>
+              <linearGradient id="grad1" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#a78bfa"/>
+                <stop offset="100%" stop-color="#6366f1"/>
+              </linearGradient>
+              <linearGradient id="grad2" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#f472b6"/>
+                <stop offset="100%" stop-color="#a78bfa"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <span class="logo-text">WAFFLE</span>
+      </a>
+
+      <div class="nav-links">
+        <a href="#" class="nav-link active" data-tab="home" id="navHome">Início</a>
+        <a href="#" class="nav-link" data-tab="movies" id="navMovies">Filmes</a>
+        <a href="#" class="nav-link" data-tab="series" id="navSeries">Séries</a>
+        <a href="#" class="nav-link" data-tab="anime" id="navAnime">
+          <span class="anime-badge">✦</span> Anime
+        </a>
+        <a href="#" class="nav-link" data-tab="trending" id="navTrending">Em Alta</a>
+      </div>
+
+      <div class="nav-actions">
+        <button class="search-toggle" id="searchToggle" aria-label="Buscar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+          </svg>
+        </button>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu Drawer -->
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#" class="nav-link active" data-tab="home">🏠 Início</a>
+      <a href="#" class="nav-link" data-tab="movies">🎬 Filmes</a>
+      <a href="#" class="nav-link" data-tab="series">📺 Séries</a>
+      <a href="#" class="nav-link" data-tab="anime">✦ Anime</a>
+      <a href="#" class="nav-link" data-tab="trending">🔥 Em Alta</a>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="search-bar-container" id="searchBarContainer">
+      <div class="search-bar-inner">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+        </svg>
+        <input type="text" class="search-input" id="searchInput" placeholder="Buscar filmes, séries, animes..." autocomplete="off" />
+        <button class="search-close" id="searchClose">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 6 6 18M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+      <div class="search-results" id="searchResults"></div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main-content" id="mainContent">
+
+    <!-- HOME PAGE -->
+    <section class="page active" id="pageHome">
+      <!-- Hero -->
+      <div class="hero-section" id="heroSection">
+        <div class="hero-slides" id="heroSlides"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content" id="heroContent">
+          <div class="hero-meta" id="heroMeta"></div>
+          <h1 class="hero-title" id="heroTitle">Carregando...</h1>
+          <p class="hero-desc" id="heroDesc"></p>
+          <div class="hero-actions" id="heroActions"></div>
+        </div>
+        <div class="hero-indicators" id="heroIndicators"></div>
+      </div>
+
+      <!-- Content Rows -->
+      <div class="content-rows" id="homeRows"></div>
+    </section>
+
+    <!-- MOVIES PAGE -->
+    <section class="page" id="pageMovies">
+      <div class="page-header">
+        <h2 class="page-title">Filmes</h2>
+        <div class="filter-bar">
+          <button class="filter-btn active" data-filter="popular">Popular</button>
+          <button class="filter-btn" data-filter="now_playing">Em Cartaz</button>
+          <button class="filter-btn" data-filter="top_rated">Mais Votados</button>
+          <button class="filter-btn" data-filter="upcoming">Em Breve</button>
+        </div>
+      </div>
+      <div class="grid-container" id="moviesGrid"></div>
+      <div class="load-more-container">
+        <button class="load-more-btn" id="moviesLoadMore">Carregar Mais</button>
+      </div>
+    </section>
+
+    <!-- SERIES PAGE -->
+    <section class="page" id="pageSeries">
+      <div class="page-header">
+        <h2 class="page-title">Séries</h2>
+        <div class="filter-bar">
+          <button class="filter-btn active" data-filter="popular">Popular</button>
+          <button class="filter-btn" data-filter="on_the_air">No Ar</button>
+          <button class="filter-btn" data-filter="top_rated">Mais Votadas</button>
+          <button class="filter-btn" data-filter="airing_today">Hoje</button>
+        </div>
+      </div>
+      <div class="grid-container" id="seriesGrid"></div>
+      <div class="load-more-container">
+        <button class="load-more-btn" id="seriesLoadMore">Carregar Mais</button>
+      </div>
+    </section>
+
+    <!-- ANIME PAGE -->
+    <section class="page" id="pageAnime">
+      <div class="page-header">
+        <h2 class="page-title">
+          Anime
+          <span class="title-badge">✦</span>
+        </h2>
+        <div class="filter-bar">
+          <button class="filter-btn active" data-filter="airing">Em Exibição</button>
+          <button class="filter-btn" data-filter="upcoming">Em Breve</button>
+          <button class="filter-btn" data-filter="bypopularity">Populares</button>
+          <button class="filter-btn" data-filter="favorite">Favoritos</button>
+        </div>
+      </div>
+      <div class="grid-container" id="animeGrid"></div>
+      <div class="load-more-container">
+        <button class="load-more-btn" id="animeLoadMore">Carregar Mais</button>
+      </div>
+    </section>
+
+    <!-- TRENDING PAGE -->
+    <section class="page" id="pageTrending">
+      <div class="page-header">
+        <h2 class="page-title">Em Alta</h2>
+        <div class="filter-bar">
+          <button class="filter-btn active" data-filter="day">Hoje</button>
+          <button class="filter-btn" data-filter="week">Esta Semana</button>
+        </div>
+      </div>
+      <div class="grid-container" id="trendingGrid"></div>
+    </section>
+
+  </main>
+
+  <!-- DETAIL MODAL -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="modal">
+      <button class="modal-close" id="modalClose">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 6 6 18M6 6l12 12"/>
+        </svg>
+      </button>
+
+      <div class="modal-backdrop" id="modalBackdrop"></div>
+      <div class="modal-gradient"></div>
+
+      <div class="modal-body">
+        <div class="modal-poster" id="modalPoster"></div>
+        <div class="modal-info">
+          <div class="modal-badges" id="modalBadges"></div>
+          <h2 class="modal-title" id="modalTitle"></h2>
+          <div class="modal-meta" id="modalMeta"></div>
+          <p class="modal-overview" id="modalOverview"></p>
+          <div class="modal-actions" id="modalActions"></div>
+
+          <!-- Episodes (for series) -->
+          <div class="episodes-section" id="episodesSection" style="display:none">
+            <h3 class="episodes-title">Episódios</h3>
+            <div class="season-selector" id="seasonSelector"></div>
+            <div class="episodes-grid" id="episodesGrid"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLAYER MODAL -->
+  <div class="player-overlay" id="playerOverlay">
+    <div class="player-container" id="playerContainer">
+      <div class="player-header">
+        <div class="player-title-info" id="playerTitleInfo">
+          <span class="dot">▶</span>
+          <span class="vidfast-tag">VidFast</span>
+          —
+        </div>
+        <button class="player-close" id="playerClose">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 6 6 18M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+      <div class="player-wrapper">
+        <div class="player-loading" id="playerLoading">
+          <div class="player-spinner"></div>
+          <p>Carregando player...</p>
+        </div>
+        <iframe id="playerFrame" src="" allowfullscreen allow="autoplay; fullscreen" frameborder="0"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script src="js/api.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/player.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
